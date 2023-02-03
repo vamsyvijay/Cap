@@ -62,6 +62,52 @@ if __name__ == '__main__':
     fptr.write(str(result) + '\n')
 
     fptr.close()
+    
+    #########################
+    timeConversion
+    
+    #!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'timeConversion' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def timeConversion(s):
+    # Write your code here
+    if s[-2:] == "AM" and s[:2] == "12": 
+        return "00" + s[2:-2] 
+    elif s[-2:] == "AM": 
+        return s[:-2]
+    elif s[-2:] == "PM" and s[:2] == "12": 
+        return s[:-2] 
+    else:
+       ans = int(s[:2]) + 12
+       return str(str(ans) + s[2:8]) 
+        
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = timeConversion(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+###################################
+
+plusMinus
+
 #!/bin/python3
 
 import math
@@ -71,31 +117,40 @@ import re
 import sys
 
 #
-# Complete the 'lonelyinteger' function below.
+# Complete the 'plusMinus' function below.
 #
-# The function is expected to return an INTEGER.
-# The function accepts INTEGER_ARRAY a as parameter.
+# The function accepts INTEGER_ARRAY arr as parameter.
 #
 
-def lonelyinteger(a):
-    for i in a:
-        count=a.count(i)
-        if count==1:
-            return i
+def plusMinus(arr):
     # Write your code here
+    positive=0
+    negative=0
+    zero=0
+    for i in arr:
+        if i>0:
+            positive=positive+1
+        elif i<0:
+            negative=negative+1
+        else:
+            zero=zero+1    
+    a=positive/len(arr)
+    b=negative/len(arr)
+    c=zero/len(arr)
+    print(round(a,6))
+    print(round(b,6))
+    print(round(c,6))            
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
     n = int(input().strip())
 
-    a = list(map(int, input().rstrip().split()))
+    arr = list(map(int, input().rstrip().split()))
 
-    result = lonelyinteger(a)
+    plusMinus(arr)
 
-    fptr.write(str(result) + '\n')
+#############################
+pangrams
 
-    fptr.close()
-
-
-    
+s = input()
+alpha_set = set(char for char in s.lower() if char.isalpha())
+print("pangram" if len(alpha_set) == 26 else "not pangram")
